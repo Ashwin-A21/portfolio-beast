@@ -927,7 +927,7 @@
     <div id="preloader">
         <div class="loader-container">
             <div class="loader-logo">
-                <img src="ff/b1.png" alt="BEAST 21 Logo" onerror="this.onerror=null;this.src='https://placehold.co/150x150/ff6600/000000?text=B21';">
+                <img src="ff/b1.png" alt="BEAST 21 Logo" onerror="this.onerror=null;this.src='https://placehold.co/150x150/ff6600/000000?text=BEAST';">
             </div>
             <div class="loader-text">BEAST 21</div>
             <div class="loader-progress">
@@ -974,7 +974,7 @@
     </header>
 
     <!-- ======== GIVEAWAY NOTICE ======== -->
-    <div id="giveaway-notice" class="fixed top-24 sm:top-20 left-1/2 -translate-x-1/2 z-40 w-[90%] max-w-2xl card-glass-ultra py-4 px-6 rounded-2xl shadow-2xl">
+    <div id="giveaway-notice" class="fixed top-24 sm:top-20 left-1/2 -translate-x-1/2 z-[55] w-[90%] max-w-2xl card-glass-ultra py-4 px-6 rounded-2xl shadow-2xl">
         <div class="flex items-center justify-between gap-4">
             <div class="flex items-center gap-4 flex-1 min-w-0"> <!-- Added min-w-0 for flex shrink -->
                 <svg class="w-7 h-7 text-yellow-400 flex-shrink-0 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
@@ -982,7 +982,7 @@
                 </svg>
                 <p class="text-sm sm:text-base font-bold text-white truncate">🎁 MEGA GIVEAWAY! Follow Instagram for exclusive rewards!</p> <!-- Added truncate -->
             </div>
-            <button id="close-notice" class="text-gray-400 hover:text-white text-3xl leading-none transition-colors flex-shrink-0">&times;</button>
+            <button id="close-notice" class="text-gray-400 hover:text-white text-3xl leading-none transition-colors flex-shrink-0 z-[56]">&times;</button>
         </div>
     </div>
 
@@ -1314,7 +1314,7 @@
              <h2 class="text-4xl sm:text-5xl md:text-6xl font-orbitron text-center mb-12 sm:mb-16 gsap-reveal text-glow-orange font-black">WARZONE GALLERY</h2>
              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 <div class="gsap-reveal gallery-item aspect-square sm:aspect-video lg:aspect-square"> <!-- Adjusted aspect ratios -->
-                    <img src="ff/4.jpg" alt="Gallery Image 1" class="gallery-img w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/600x600/111/fff?text=Squad+Wipe';">
+                    <img src="ff/4.jpeg" alt="Gallery Image 1" class="gallery-img w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/600x600/111/fff?text=Squad+Wipe';">
                     <div class="gallery-overlay">
                         <p class="text-white font-orbitron text-xl sm:text-2xl font-bold mb-1 sm:mb-2">EPIC SQUAD WIPE</p>
                         <p class="text-gray-300 text-sm sm:text-base">Clock Tower Domination</p>
@@ -1325,7 +1325,7 @@
                     </div>
                 </div>
                 <div class="gsap-reveal gallery-item aspect-square sm:aspect-video" data-delay="0.15">
-                    <img src="ff/5.jpg" alt="Gallery Image 2" class="gallery-img w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/600x400/111/fff?text=Victory';">
+                    <img src="ff/5.jpeg" alt="Gallery Image 2" class="gallery-img w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/600x400/111/fff?text=Victory';">
                      <div class="gallery-overlay">
                         <p class="text-white font-orbitron text-xl sm:text-2xl font-bold mb-1 sm:mb-2">FINAL CIRCLE VICTORY</p>
                         <p class="text-gray-300 text-sm sm:text-base">1v4 Impossible Clutch</p>
@@ -1336,7 +1336,7 @@
                     </div>
                 </div>
                  <div class="gsap-reveal gallery-item aspect-square sm:aspect-video lg:aspect-square" data-delay="0.3">
-                    <img src="ff/6.jpg" alt="Gallery Image 3" class="gallery-img w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/600x600/111/fff?text=Booyah';">
+                    <img src="ff/6.jpeg" alt="Gallery Image 3" class="gallery-img w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/600x600/111/fff?text=Booyah';">
                      <div class="gallery-overlay">
                         <p class="text-white font-orbitron text-xl sm:text-2xl font-bold mb-1 sm:mb-2">LEGENDARY BOOYAH</p>
                         <p class="text-gray-300 text-sm sm:text-base">30+ Kill Game Record</p>
@@ -1634,8 +1634,18 @@
                     }
                     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
                     particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+                    // Create a circle texture
+                    const canvas = document.createElement('canvas');
+                    canvas.width = 32;
+                    canvas.height = 32;
+                    const context = canvas.getContext('2d');
+                    context.beginPath();
+                    context.arc(16, 16, 16, 0, 2 * Math.PI); // Draw a circle
+                    context.fillStyle = '#FFFFFF'; // Make it white
+                    context.fill();
+                    const particleTexture = new THREE.CanvasTexture(canvas);
 
-                    const particleMaterial = new THREE.PointsMaterial({ size: isMobile ? 2 : 3, transparent: true, blending: THREE.AdditiveBlending, opacity: 0.8, depthWrite: false, vertexColors: true, sizeAttenuation: true });
+                    const particleMaterial = new THREE.PointsMaterial({ size: isMobile ? 2 : 3, transparent: true, blending: THREE.AdditiveBlending, opacity: 0.8, depthWrite: false, vertexColors: true, sizeAttenuation: true, map: particleTexture });
                     particleSystem = new THREE.Points(particlesGeometry, particleMaterial);
                     scene.add(particleSystem);
 
